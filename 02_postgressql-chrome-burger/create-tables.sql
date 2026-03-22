@@ -1,23 +1,25 @@
+-- Create Tables for Chrome Burger Database 
 -- 1. Create Suppliers Table
-CREATE TABLE Suppliers (
-     supplier_id SERIAL PRIMARY KEY,
-     name VARCHAR(255) NOT NULL,
-         contact_person VARCHAR(255),
-         phone_number VARCHAR(20)
-     );
+DROP TABLE IF EXISTS Suppliers,Staff,Ingredients,MenuItems,RecipeItems,Orders,OrderItems CASCADE;
+CREATE TABLE Suppliers ( 
+     supplier_id SERIAL PRIMARY KEY,-- define column supplier_id เป็น SERIAL เพื่อให้เพิ่มค่าอัตโนมัติ , set this column as PRIMARY KEY
+     name VARCHAR(255) NOT NULL, -- ชื่อผู้จัดส่ง, set this column as NOT NULL ,define the data type as VARCHAR(255)
+         contact_person VARCHAR(255), -- บุคคลติดต่อ, define the data type as VARCHAR(255)
+         phone_number VARCHAR(20) -- หมายเลขโทรศัพท์, define the data type as VARCHAR(20)
+);
      
 -- 2. Create Staff Table
 CREATE TABLE Staff (
     staff_id SERIAL PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
-    role VARCHAR(50)
+    role VARCHAR(50) -- ตำแหน่งงาน, define the data type as VARCHAR(50)
 );
     
 -- 3. Create Ingredients Table
 CREATE TABLE Ingredients (
     ingredient_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL UNIQUE,--
     stock_level DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
     unit VARCHAR(50) NOT NULL,
     supplier_id INTEGER REFERENCES Suppliers(supplier_id)
